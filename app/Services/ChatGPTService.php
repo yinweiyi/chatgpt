@@ -30,13 +30,6 @@ class ChatGPTService
      */
     public function handleMessage($post): array
     {
-        sleep(2);
-
-        return ['type' => 'chat', 'data' => [
-            "role" => "assistant",
-            "content" => "\n\nHello there, how may I assist you today?",
-        ]];
-
         $type = $post['type'] ?? head($this->config['types']);
         if (!in_array($type, $this->config['types'])) {
             Log::channel('http_client')->error('Request type' . $type . ' is not allow');
