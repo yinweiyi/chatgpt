@@ -30,16 +30,17 @@ class ChatGPTService
      */
     public function handleMessage($post): array
     {
+        $data = [];
         $type = $post['type'] ?? head($this->config['types']);
         if (!in_array($type, $this->config['types'])) {
             Log::channel('http_client')->error('Request type' . $type . ' is not allow');
-            return [];
+            return compact('type', 'data');
         }
-        $data = [];
+
         if ($type === 'chat') {
             $messages = $post['messages'];
             if (empty($messages)) {
-                return [];
+                return compact('type', 'data');
             }
             $data = $this->chat($messages);
         }
@@ -81,7 +82,6 @@ class ChatGPTService
                 $contents = $response->getBody()->getContents();
                 Log::channel('http_client')->info('chatgpt response:' . $contents);
                 return \json_decode($contents, true);
-
             }
             return [];
         } catch (GuzzleException $exception) {
