@@ -68,7 +68,7 @@ const chatEffect = (store) => {
         question.value = ''
         spinning.value = true
         axios.post('/api/chatgpt/chat', {
-            type: chat,
+            type: 'chat',
             messages: list.value
         }).then(response => {
             if (response.data.data) {
