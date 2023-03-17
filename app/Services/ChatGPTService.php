@@ -30,7 +30,7 @@ class ChatGPTService
      */
     public function handleMessage($post): array
     {
-        $data = [];
+        $data = null;
         $type = $post['type'] ?? head($this->config['types']);
         if (!in_array($type, $this->config['types'])) {
             Log::channel('http_client')->error('Request type' . $type . ' is not allow');
@@ -52,9 +52,9 @@ class ChatGPTService
      * 聊天
      *
      * @param array $messages
-     * @return array
+     * @return array|null
      */
-    public function chat(array $messages): array
+    public function chat(array $messages): array|null
     {
         $params = [
             'model' => 'gpt-3.5-turbo',
@@ -63,7 +63,7 @@ class ChatGPTService
         $method = '/v1/chat/completions';
 
         $result = $this->request($params, $method, $this->getHeader());
-        return $result['choices'][0]['message'] ?? [];
+        return $result['choices'][0]['message'] ?? null;
     }
 
     /**
@@ -72,9 +72,9 @@ class ChatGPTService
      * @param $params
      * @param $method
      * @param $header
-     * @return array
+     * @return array|null
      */
-    public function request($params, $method, $header): array
+    public function request($params, $method, $header): array|null
     {
         try {
             $response = Http::json(self::DOMAIN . $method, $params, 'post', $header);
@@ -83,10 +83,10 @@ class ChatGPTService
                 Log::channel('http_client')->info('chatgpt response:' . $contents);
                 return \json_decode($contents, true);
             }
-            return [];
+            return null;
         } catch (GuzzleException $exception) {
             Log::error('Get chatgpt response error:' . $exception->getMessage());
-            return [];
+            return null;
         }
     }
 
