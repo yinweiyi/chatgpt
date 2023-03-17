@@ -71,7 +71,7 @@ const chatEffect = (store) => {
             type: 'chat',
             messages: list.value
         }).then(response => {
-            if (response.data.data) {
+            if (response.data) {
                 store.commit('appendMessage', response.data.data)
             } else {
                 message.error('错误：服务器错误。。')
