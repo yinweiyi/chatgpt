@@ -1,0 +1,9 @@
+curl https://api.openai.com/v1/models -H "Authorization: Bearer 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"
+
+curl https://api.openai.com/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer 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" \
+  -d '{
+    "model": "gpt-3.5-turbo",
+    "messages": [{"role": "user", "content": "用java写个99乘法表"}]
+  }'
