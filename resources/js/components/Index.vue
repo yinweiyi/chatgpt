@@ -69,7 +69,7 @@ const chatEffect = (store) => {
         spinning.value = true
         axios.post('/api/chatgpt/chat', {
             type: chat,
-            messages: list.value.map(item => item.data)
+            messages: list.value
         }).then(response => {
             if (response.data.data) {
                 store.commit('appendMessage', response.data.data)
