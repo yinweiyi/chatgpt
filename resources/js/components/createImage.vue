@@ -1,5 +1,5 @@
 <template>
-    <div class="chat_window">
+    <div class="image_window">
         <a-form :model="formState" :label-col="labelCol">
             <a-form-item label="描述">
                 <a-input v-model:value="formState.prompt"/>
@@ -19,10 +19,14 @@
                 </a-radio-group>
             </a-form-item>
             <a-form-item label="图片">
+
                 <a-spin :spinning="spinning">
                     <div class="images">
                         <a-image-preview-group>
-                            <a-image  class="image" v-for="image in images" :width="200" :src="image.url"/>
+                            <a-image :width="200" src="https://aliyuncdn.antdv.com/vue.png" />
+                            <a-image :width="200" src="https://aliyuncdn.antdv.com/logo.png" />
+
+                            <a-image class="image" v-for="image in images" :width="200" :src="image.url"/>
                         </a-image-preview-group>
                     </div>
                 </a-spin>
@@ -55,7 +59,7 @@ export default defineComponent({
         const spinning = ref(false)
 
         const onSubmit = () => {
-            if (!formState.prompt){
+            if (!formState.prompt) {
                 message.error('描述不能为空')
                 return
             }
@@ -86,8 +90,8 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss">
-.chat_window {
+<style lang="scss">
+.image_window {
     width: calc(100% - 20px);
     max-width: 800px;
     min-height: 600px;
@@ -96,15 +100,18 @@ export default defineComponent({
     padding: 50px 10px 0 0;
     overflow: hidden;
     background-color: #fff;
-}
 
-.images {
-    height: 440px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: #f3f2f2;
-    .image {
-        margin: 5px;
+    .images {
+        height: 440px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: #f3f2f2;
+
+        .ant-image {
+            margin: 5px;
+        }
     }
 }
+
+
 </style>
