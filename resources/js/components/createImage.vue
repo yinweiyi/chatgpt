@@ -21,7 +21,7 @@
             <a-form-item label="图片">
                 <a-spin :spinning="spinning">
                     <div class="images">
-                        <a-image-preview-group>
+                        <a-image-preview-group class="image">
                             <a-image v-for="image in images" :width="200" :src="image.url"/>
                         </a-image-preview-group>
                     </div>
@@ -86,7 +86,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .chat_window {
     width: calc(100% - 20px);
     max-width: 800px;
@@ -103,5 +103,8 @@ export default defineComponent({
     overflow-x: hidden;
     overflow-y: auto;
     background-color: #f3f2f2;
+    .image {
+        margin: 5px;
+    }
 }
 </style>
