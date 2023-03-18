@@ -43,6 +43,12 @@ class ChatGPTService
                 return compact('type', 'data');
             }
             $data = $this->chat($messages);
+        } elseif ($type === 'image_create') {
+            $params = $post['params'] ;
+            if (empty($params)) {
+                return compact('type', 'data');
+            }
+            $data = $this->imagesGenerations($params);
         }
 
         return compact('type', 'data');
@@ -64,6 +70,20 @@ class ChatGPTService
 
         $result = $this->request($params, $method, $this->getHeader());
         return $result['choices'][0]['message'] ?? null;
+    }
+
+    /**
+     * @param $params
+     * prompt:  A text description of the desired image(s). The maximum length is 1000 characters.
+     * n: The number of images to generate. Must be between 1 and 10.
+     * size: The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.
+     * @return void
+     */
+    public function imagesGenerations($params)
+    {
+        $method = '/v1/images/generations';
+        $result = $this->request($params, $method, $this->getHeader());
+        return $result['data'] ?? null;
     }
 
     /**
