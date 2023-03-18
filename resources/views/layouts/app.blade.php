@@ -11,7 +11,7 @@
         }
 
         body {
-            background-color: #edeff2;
+            background-color: #f0f2f5 !important;
             font-family: "Calibri", "Roboto", sans-serif;
         }
     </style>
