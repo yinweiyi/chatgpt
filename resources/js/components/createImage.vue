@@ -23,9 +23,6 @@
                 <a-spin :spinning="spinning">
                     <div class="images">
                         <a-image-preview-group>
-                            <a-image :width="200" src="https://aliyuncdn.antdv.com/vue.png" />
-                            <a-image :width="200" src="https://aliyuncdn.antdv.com/logo.png" />
-
                             <a-image class="image" v-for="image in images" :width="200" :src="image.url"/>
                         </a-image-preview-group>
                     </div>
