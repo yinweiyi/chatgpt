@@ -21,8 +21,8 @@
             <a-form-item label="图片">
                 <a-spin :spinning="spinning">
                     <div class="images">
-                        <a-image-preview-group class="image">
-                            <a-image v-for="image in images" :width="200" :src="image.url"/>
+                        <a-image-preview-group>
+                            <a-image  class="image" v-for="image in images" :width="200" :src="image.url"/>
                         </a-image-preview-group>
                     </div>
                 </a-spin>
